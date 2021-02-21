@@ -29,6 +29,7 @@
     "prettier": "^2.2.1"
   },
   "dependencies": {
-    "csv-parser": "^3.0.0"
+    "csv-parser": "^3.0.0",
+    "puppeteer": "^7.1.0"
   }
 }

@@ -36,7 +36,7 @@ cli.totalDependencies = (results) => {
       if (d in counter) {
         counter[d] += 1;
       } else {
-        counter[d] = 0;
+        counter[d] = 1;
       }
     });
   });

@@ -29,6 +29,23 @@ cli.contentLength = (results) => {
   });
 };
 
+cli.totalDependencies = (results) => {
+  const counter = {};
+  results.forEach((result) => {
+    result.dependencies.forEach((d) => {
+      if (d in counter) {
+        counter[d] += 1;
+      } else {
+        counter[d] = 0;
+      }
+    });
+  });
+
+  Object.keys(counter).forEach((key) => {
+    console.log(`${key}, ${counter[key]}`);
+  });
+};
+
 cli.start = async () => {
   if (!process.argv[2]) {
     console.log(
@@ -46,6 +63,9 @@ cli.start = async () => {
       break;
     case '--contentLength':
       cli.contentLength(results);
+      break;
+    case '--totalDependencies':
+      cli.totalDependencies(results);
       break;
     default:
       console.log('Unknown parameter');

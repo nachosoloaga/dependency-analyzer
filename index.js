@@ -1,11 +1,28 @@
 require('dotenv').config();
 
 const puppeteer = require('puppeteer');
+const program = require('commander');
+const packageJS = require('./package.json');
 const reader = require('./lib/reader');
 const worker = require('./lib/worker');
 
-const processWebsites = async () => {
-  const websites = await reader.readCsv(process.env.EXAMPLE_CSV_PATH);
+program
+  .version(packageJS.version)
+  .option('--dependencies', 'Log all JS dependencies of each website')
+  .option(
+    '--total-dependencies',
+    'Log the number of occurrences of each JS dependency among all websites'
+  )
+  .option('--content-length', 'Log the content length in bytes of each website')
+  .option(
+    '--csv-path <path>',
+    'Indicates a path to the desired CSV. If not present, example CSV is used by default',
+    process.env.EXAMPLE_CSV_PATH
+  )
+  .parse(process.argv);
+
+const processWebsites = async (csvPath) => {
+  const websites = await reader.readCsv(csvPath);
   const browser = await puppeteer.launch({ headless: true });
 
   const result = await Promise.all(websites.map((site) => worker.processWebsite(site, browser)));
@@ -47,29 +64,20 @@ const totalDependencies = (results) => {
 };
 
 const start = async () => {
-  if (!process.argv[2]) {
-    console.log(
-      'Please indicate a task (--dependencies, --contentLength, --totalDependencies, --all)'
-    );
+  const options = program.opts();
 
-    return;
+  let results;
+  if (options.dependencies || options.totalDependencies || options.contentLength) {
+    results = await processWebsites(options.csvPath);
+  } else {
+    console.log('Use --help command to see all available params');
   }
 
-  const results = await processWebsites();
+  console.log(options.csvPath);
 
-  switch (process.argv[2]) {
-    case '--dependencies':
-      dependencies(results);
-      break;
-    case '--contentLength':
-      contentLength(results);
-      break;
-    case '--totalDependencies':
-      totalDependencies(results);
-      break;
-    default:
-      console.log('Unknown parameter');
-  }
+  if (options.dependencies) dependencies(results);
+  if (options.totalDependencies) totalDependencies(results);
+  if (options.contentLength) contentLength(results);
 };
 
 start();

@@ -33,16 +33,14 @@ const processWebsites = async (csvPath) => {
 };
 
 const dependencies = (results) => {
-  results.map((site) => {
-    site.dependencies.map((d) => console.log(`${site.title} , ${d}`));
-    return null;
+  results.forEach((site) => {
+    site.dependencies.forEach((d) => console.log(`${site.title} , ${d}`));
   });
 };
 
 const contentLength = (results) => {
-  results.map((site) => {
+  results.forEach((site) => {
     console.log(`${site.title}, ${site.contentLength}`);
-    return null;
   });
 };
 

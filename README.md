@@ -34,6 +34,7 @@ You can optionally run `nvm use` command to automatically start using node versi
   - `--dependencies`: list JavaScript dependencies of each website.
   - `--total-dependencies`: list the number of occurrences of each JavaScript dependency among all websites.
   - `--content-length`: log the content length of each website in bytes.
+  - `--help`: log info about all parameters available.
 - Also you can optionally use `--csv-path` to indicate the **absolute** path to a desired CSV. The CSV must contain **title** and **url** headers, and a list of websites. In case `--csv-path` is not present, example CSV by default is used.
 
 #### Additional notes

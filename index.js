@@ -41,7 +41,7 @@ const dependencies = (results) => {
 
 const contentLength = (results) => {
   results.map((site) => {
-    console.log(`${site.title}, ${site.content_length}`);
+    console.log(`${site.title}, ${site.contentLength}`);
     return null;
   });
 };
@@ -72,8 +72,6 @@ const start = async () => {
   } else {
     console.log('Use --help command to see all available params');
   }
-
-  console.log(options.csvPath);
 
   if (options.dependencies) dependencies(results);
   if (options.totalDependencies) totalDependencies(results);

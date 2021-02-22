@@ -30,12 +30,12 @@ The list of websites must be provided in a CSV file with __title__ and __url__ h
 #### Additional notes
 Each website listed in the CSV file could have a HTTP url or a filesystem path. As the tool uses __[puppeteer](https://pptr.dev/)__ to scrap each website HTML and its interface allows both type of URIs, no differences or additional checks are made. 
 
-### Tests ✅
+## Tests ✅
 Tests are run using __[Jest](https://jestjs.io/docs/en/cli)__.
 
 Run `npm run test` to run tests.
 
-### Future work? Yes! 👍
+## Future work? Yes! 👍
 
 Despite the actual version being a functional and complying tool with all initial requirements, there's always space to improve. A few ideas that could very much be integrated in the future are:
 

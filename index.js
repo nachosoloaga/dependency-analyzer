@@ -4,9 +4,7 @@ const puppeteer = require('puppeteer');
 const reader = require('./lib/reader');
 const worker = require('./lib/worker');
 
-const cli = {};
-
-cli.processWebsites = async () => {
+const processWebsites = async () => {
   const websites = await reader.readCsv(process.env.EXAMPLE_CSV_PATH);
   const browser = await puppeteer.launch({ headless: true });
 
@@ -17,21 +15,21 @@ cli.processWebsites = async () => {
   return result;
 };
 
-cli.dependencies = (results) => {
+const dependencies = (results) => {
   results.map((site) => {
     site.dependencies.map((d) => console.log(`${site.title} , ${d}`));
     return null;
   });
 };
 
-cli.contentLength = (results) => {
+const contentLength = (results) => {
   results.map((site) => {
     console.log(`${site.title}, ${site.content_length}`);
     return null;
   });
 };
 
-cli.totalDependencies = (results) => {
+const totalDependencies = (results) => {
   const counter = {};
   results.forEach((result) => {
     result.dependencies.forEach((d) => {
@@ -48,7 +46,7 @@ cli.totalDependencies = (results) => {
   });
 };
 
-cli.start = async () => {
+const start = async () => {
   if (!process.argv[2]) {
     console.log(
       'Please indicate a task (--dependencies, --contentLength, --totalDependencies, --all)'
@@ -57,21 +55,21 @@ cli.start = async () => {
     return;
   }
 
-  const results = await cli.processWebsites();
+  const results = await processWebsites();
 
   switch (process.argv[2]) {
     case '--dependencies':
-      cli.dependencies(results);
+      dependencies(results);
       break;
     case '--contentLength':
-      cli.contentLength(results);
+      contentLength(results);
       break;
     case '--totalDependencies':
-      cli.totalDependencies(results);
+      totalDependencies(results);
       break;
     default:
       console.log('Unknown parameter');
   }
 };
 
-cli.start();
+start();

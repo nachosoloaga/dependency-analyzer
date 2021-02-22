@@ -15,15 +15,15 @@ describe('Worker tests', () => {
     await browser.close();
   });
 
-  test('Process HTML and return JS dependencies', async () => {
+  test('Process HTML and return JS dependencies', () => {
     expect(result.dependencies).toContain('munchkin.js');
   });
 
-  test('Process HTML and return title', async () => {
+  test('Process HTML and return title', () => {
     expect(result.title).toEqual('Trello');
   });
 
-  test('Process HTML and return content length', async () => {
+  test('Process HTML and return content length', () => {
     contentLength = parseInt(result.contentLength, 10);
 
     expect(contentLength).toBeGreaterThan(20000);

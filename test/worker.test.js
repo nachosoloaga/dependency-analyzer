@@ -6,9 +6,9 @@ describe('Worker tests', () => {
   let mockSite = {};
   let result = {};
 
-  beforeAll(async () => {
-    jest.setTimeout(100000);
+  jest.setTimeout(100000);
 
+  beforeAll(async () => {
     browser = await puppeteer.launch({ headless: true });
     mockSite = { title: 'Trello', url: 'https://www.trello.com/' };
     result = await worker.processWebsite(mockSite, browser);

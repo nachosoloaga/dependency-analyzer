@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const puppeteer = require('puppeteer');
 const reader = require('./lib/reader');
 const worker = require('./lib/worker');
@@ -5,7 +7,7 @@ const worker = require('./lib/worker');
 const cli = {};
 
 cli.processWebsites = async () => {
-  const websites = await reader.readCsv('./lib/reader/websites.csv');
+  const websites = await reader.readCsv(process.env.EXAMPLE_CSV_PATH);
   const browser = await puppeteer.launch({ headless: true });
 
   const result = await Promise.all(websites.map((site) => worker.processWebsite(site, browser)));

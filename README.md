@@ -38,7 +38,9 @@ You can optionally run `nvm use` command to automatically start using node versi
 
 #### Additional notes
 
-Each website listed in the CSV file could have a HTTP url or a filesystem path. As the tool uses **[puppeteer](https://pptr.dev/)** to scrap each website HTML and its interface allows both type of URIs, no differences or additional checks are made.
+- Each website listed in the CSV file could have a HTTP url or a filesystem path. As the tool uses **[puppeteer](https://pptr.dev/)** to scrap each website HTML and its interface allows both type of URIs, no differences or additional checks are made.
+
+- Currently **.env** file is only used for example and test CSV paths.
 
 ## Tests ✅
 
